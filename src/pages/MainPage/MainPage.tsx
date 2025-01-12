@@ -1,15 +1,25 @@
-// src/pages/MainPage/MainPage.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../../containers/Layout/Layout';
 import Section from '../../containers/Section/Section';
 import Button from '../../components/Button/Button';
 import Modal from '../../containers/Modal/Modal';
 import LoginForm from '../../screens/LoginForm/LoginForm';
 import RegisterForm from '../../screens/RegisterForm/RegisterForm';
+import { getMainPageData, MainPageData } from '../../api/mainPage';
 
 const MainPage: React.FC = () => {
 	const [showLoginModal, setShowLoginModal] = useState(false);
 	const [showRegisterModal, setShowRegisterModal] = useState(false);
+	const [data, setData] = useState<MainPageData | null>(null);
+	const [error, setError] = useState<string | null>(null);
+
+	useEffect(() => {
+		getMainPageData()
+			.then((response) => setData(response))
+			.catch((err) =>
+				setError(err instanceof Error ? err.message : String(err))
+			);
+	}, []);
 
 	return (
 		<Layout>
@@ -41,6 +51,8 @@ const MainPage: React.FC = () => {
 						/>
 					</Modal>
 				)}
+				{data && <div>{data.message}</div>}
+				{error && <div>Error: {error}</div>}
 			</Section>
 		</Layout>
 	);

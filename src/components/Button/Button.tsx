@@ -1,29 +1,40 @@
 import React from 'react';
 import { ButtonProps } from './types';
-import './button.css';
+import styles from './button.module.css';
+import clsx from 'clsx';
+import { Icon } from '@/ui';
 
-/** Primary UI component for user interaction */
-export const Button = ({
-	primary = false,
-	size = 'medium',
-	backgroundColor,
-	label,
+const Button: React.FC<ButtonProps> = ({
+	type = 'button',
+	variant = 'primary',
+	disabled = false,
+	waiting = false,
+	onClick,
+	className,
+	children,
+	href,
+	Tag = 'button',
+	label, // Добавлен пропс label
 	...props
-}: ButtonProps) => {
-	const mode = primary
-		? 'storybook-button--primary'
-		: 'storybook-button--secondary';
+}) => {
+	const TagElement = Tag === 'a' ? 'a' : Tag;
+
 	return (
-		<button
-			type="button"
-			className={['storybook-button', `storybook-button--${size}`, mode].join(
-				' '
-			)}
-			style={{ backgroundColor }}
+		<TagElement
+			type={Tag === 'button' ? type : undefined}
+			href={Tag === 'a' ? href : undefined}
+			className={clsx(styles.button, styles[variant], className, {
+				[styles.disabled]: disabled,
+				[styles.waiting]: waiting,
+			})}
+			onClick={onClick}
+			disabled={disabled}
 			{...props}
 		>
-			{label}
-		</button>
+			{waiting && <Icon name="loader" />}
+			{label} {/* Используем пропс label */}
+			{children}
+		</TagElement>
 	);
 };
 

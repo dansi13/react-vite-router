@@ -1,12 +1,23 @@
-export interface ButtonProps {
-	/** Is this the principal call to action on the page? */
-	primary?: boolean;
-	/** What background color to use */
-	backgroundColor?: string;
-	/** How large should the button be? */
-	size?: 'small' | 'medium' | 'large';
-	/** Button contents */
-	label: string;
-	/** Optional click handler */
+import {
+	AnchorHTMLAttributes,
+	ButtonHTMLAttributes,
+	ElementType,
+	ReactNode,
+} from 'react';
+
+export type ButtonVariant = 'primary' | 'secondary' | 'success' | 'danger';
+export type ButtonType = 'button' | 'submit' | 'reset';
+export type ButtonTag = 'button' | 'a';
+
+export type ButtonProps = {
+	type?: ButtonType;
+	variant?: ButtonVariant;
+	disabled?: boolean;
+	waiting?: boolean;
 	onClick?: () => void;
-}
+	className?: string;
+	children?: ReactNode;
+	href?: string;
+	Tag?: ButtonTag;
+	label?: string; // Добавлен пропс label
+};

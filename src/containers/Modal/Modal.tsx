@@ -1,14 +1,15 @@
 import React from 'react';
 import { ModalProps } from './types';
+import styles from './modal.module.css';
 
 const Modal: React.FC<ModalProps> = ({ children, onClose }) => {
 	return (
-		<div className="modal">
-			<div className="modal-content">
-				<button className="modal-close" onClick={onClose}>
+		<div className={styles.modal}>
+			<div className={styles['modal-content']}>
+				<button className={styles['modal-close']} onClick={onClose}>
 					&times;
 				</button>
-				{children}
+				<div className={styles['modal-body']}>{children}</div>
 			</div>
 		</div>
 	);

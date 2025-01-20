@@ -1,16 +1,18 @@
 import React from 'react';
-import Anchor from '../../components/Anchor/Anchor';
-import { HeaderProps } from './types';
+import Menu from '../Menu/Menu';
+import styles from './header.module.css';
 
-const Header: React.FC<HeaderProps> = () => {
+const Header: React.FC<React.HTMLAttributes<HTMLElement>> = () => {
+	const menuItems = [
+		{ href: '/', label: 'Home' },
+		{ href: '/login', label: 'Login' },
+		{ href: '/register', label: 'Register' },
+	];
+
 	return (
-		<header className="header">
-			<div className="logo">Logo</div>
-			<nav className="menu">
-				<Anchor href="/">Home</Anchor>
-				<Anchor href="/login">Login</Anchor>
-				<Anchor href="/register">Register</Anchor>
-			</nav>
+		<header className={styles.header}>
+			<div className={styles.logo}>Logo</div>
+			<Menu items={menuItems} />
 		</header>
 	);
 };

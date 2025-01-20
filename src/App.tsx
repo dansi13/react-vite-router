@@ -1,19 +1,28 @@
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router';
-import { routes as publicRoutes } from '@/routes/routes';
+// src/App.tsx
+import React, { useState, useEffect } from 'react';
+import LoginPage from './pages/LoginPage/LoginPage';
+import { getLoginPageData, LoginPageData } from './api/loginPage';
 
-function LayoutWrapper() {
-	return <Outlet />;
-}
+const handleLoginSubmit = (email: string, password: string) => {
+  console.log('Login submitted:', { email, password });
+  // Handle login logic
+};
 
-const router = createBrowserRouter([
-	{
-		element: <LayoutWrapper />,
-		children: publicRoutes,
-	},
-]);
+const App: React.FC = () => {
+  const [data, setData] = useState<LoginPageData | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-function App() {
-	return <RouterProvider router={router} />;
-}
+  useEffect(() => {
+    getLoginPageData()
+      .then((response) => setData(response))
+      .catch((err) =>
+        setError(err instanceof Error ? err.message : String(err))
+      );
+  }, []);
+
+  return (
+    <LoginPage data={data} error={error} onSubmit={handleLoginSubmit} />
+  );
+};
 
 export default App;

@@ -2,12 +2,13 @@ import React from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import { LayoutProps } from './types';
+import styles from './layout.module.css';
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ children, wrapInMain = true }) => {
 	return (
-		<div className="container">
+		<div className={styles.container}>
 			<Header />
-			<main>{children}</main>
+			{wrapInMain ? <main>{children}</main> : children}
 			<Footer />
 		</div>
 	);

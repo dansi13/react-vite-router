@@ -1,3 +1,6 @@
-export interface LayoutProps {
-	children: React.ReactNode;
+import { HTMLAttributes, ReactNode } from 'react';
+
+export interface LayoutProps extends HTMLAttributes<HTMLDivElement> {
+	children: ReactNode;
+	wrapInMain?: boolean;
 }

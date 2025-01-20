@@ -18,6 +18,7 @@
     "test-storybook:ci": "concurrently -k -s first -n \"SB,TEST\" -c \"magenta,blue\" \"yarn build-storybook --quiet && yarn http-server storybook-static --port 6006 --silent\" \"wait-on tcp:6006 && yarn test-storybook\""
   },
   "dependencies": {
+    "@types/react-router-dom": "^5.3.3",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.13",
     "i18next": "^24.2.0",
@@ -27,9 +28,11 @@
     "lodash": "^4.17.21",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-fetcher": "^0.3.0",
     "react-i18next": "^15.2.0",
     "react-imask": "^7.6.1",
-    "react-router": "^7.1.1"
+    "react-router": "^7.1.1",
+    "react-router-dom": "^7.1.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "3.2.3",

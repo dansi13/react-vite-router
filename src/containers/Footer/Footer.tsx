@@ -1,16 +1,18 @@
 import React from 'react';
-import Anchor from '../../components/Anchor/Anchor';
-import { FooterProps } from './types';
+import Menu from '../Menu/Menu';
+import styles from './footer.module.css';
 
-const Footer: React.FC<FooterProps> = () => {
+const Footer: React.FC<React.HTMLAttributes<HTMLElement>> = () => {
+	const menuItems = [
+		{ href: '/', label: 'Home' },
+		{ href: '/login', label: 'Login' },
+		{ href: '/register', label: 'Register' },
+	];
+
 	return (
-		<footer className="footer">
-			<div className="logo">Logo</div>
-			<nav className="menu">
-				<Anchor href="/">Home</Anchor>
-				<Anchor href="/login">Login</Anchor>
-				<Anchor href="/register">Register</Anchor>
-			</nav>
+		<footer className={styles.footer}>
+			<div className={styles.logo}>Logo</div>
+			<Menu items={menuItems} />
 		</footer>
 	);
 };

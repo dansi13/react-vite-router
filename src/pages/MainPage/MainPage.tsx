@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Layout from '../../containers/Layout/Layout';
 import Section from '../../containers/Section/Section';
 import Button from '../../components/Button/Button';
-import Modal from '../../containers/Modal/Modal';
+import ModalTrigger from '../../components/ModalTrigger/ModalTrigger';
 import LoginForm from '../../screens/LoginForm/LoginForm';
 import RegisterForm from '../../screens/RegisterForm/RegisterForm';
 import { getMainPageData, MainPageData } from '../../api/mainPage';
@@ -24,33 +24,59 @@ const MainPage: React.FC = () => {
 	return (
 		<Layout>
 			<Section>
-				<Button onClick={() => setShowLoginModal(true)} label="Login" />
-				<Button onClick={() => setShowRegisterModal(true)} label="Register" />
-				{showLoginModal && (
-					<Modal onClose={() => setShowLoginModal(false)}>
+				<ModalTrigger
+					button={
+						<Button
+							Tag="button"
+							onClick={() => setShowLoginModal(true)}
+							label="Login"
+						/>
+					}
+					modalContent={
 						<LoginForm
-							onSubmit={(email, password) => {
-								console.log('Login:', { email, password });
-								setShowLoginModal(false);
-							}}
+                            onSubmit={(email, password) => {
+                                console.log('Login:', { email, password });
+                                setShowLoginModal(false);
+                            } } email={''} password={''} onEmailChange={function (email: string): void {
+                                throw new Error('Function not implemented.');
+                            } } onPasswordChange={function (password: string): void {
+                                throw new Error('Function not implemented.');
+                            } }						/>
+					}
+					isOpen={showLoginModal}
+					onClose={() => setShowLoginModal(false)}
+				/>
+				<ModalTrigger
+					button={
+						<Button
+							Tag="button"
+							onClick={() => setShowRegisterModal(true)}
+							label="Register"
 						/>
-					</Modal>
-				)}
-				{showRegisterModal && (
-					<Modal onClose={() => setShowRegisterModal(false)}>
+					}
+					modalContent={
 						<RegisterForm
-							onSubmit={(name, email, password, confirmPassword) => {
-								console.log('Register:', {
-									name,
-									email,
-									password,
-									confirmPassword,
-								});
-								setShowRegisterModal(false);
-							}}
-						/>
-					</Modal>
-				)}
+                            onSubmit={(name, email, password, confirmPassword) => {
+                                console.log('Register:', {
+                                    name,
+                                    email,
+                                    password,
+                                    confirmPassword,
+                                });
+                                setShowRegisterModal(false);
+                            } } name={''} email={''} password={''} confirmPassword={''} onNameChange={function (name: string): void {
+                                throw new Error('Function not implemented.');
+                            } } onEmailChange={function (email: string): void {
+                                throw new Error('Function not implemented.');
+                            } } onPasswordChange={function (password: string): void {
+                                throw new Error('Function not implemented.');
+                            } } onConfirmPasswordChange={function (confirmPassword: string): void {
+                                throw new Error('Function not implemented.');
+                            } }						/>
+					}
+					isOpen={showRegisterModal}
+					onClose={() => setShowRegisterModal(false)}
+				/>
 				{data && <div>{data.message}</div>}
 				{error && <div>Error: {error}</div>}
 			</Section>

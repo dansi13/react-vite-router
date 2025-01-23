@@ -10,7 +10,8 @@ import clsx from 'clsx';
 
 export type FieldProps = {
 	className?: string;
-	fieldText: string;
+	fieldText?: string;
+	label: string;
 	type?: string;
 	value?: string;
 	onChange?: (
@@ -30,27 +31,14 @@ export const Field: FunctionComponent<FieldProps> = ({
 	name,
 	placeholder,
 	readOnly,
-}: FieldProps) => {
-	const [valueInput, setValueInput] = useState(value);
-
-	const onInputChange = (
-		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-	) => {
-		setValueInput(e.target.value);
-		onChange?.(e);
-	};
-
-	useEffect(() => {
-		setValueInput(value || '');
-	}, [value]);
-
+}) => {
 	return (
-		<label className={`${styles.label} ${className}`}>
+		<label className={clsx(styles.label, className)}>
 			<span>{fieldText}</span>
 			<input
 				type={type}
-				value={valueInput}
-				onChange={onInputChange}
+				value={value}
+				onChange={onChange}
 				className={clsx(styles['input__field'])}
 				name={name}
 				placeholder={placeholder}

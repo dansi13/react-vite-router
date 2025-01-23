@@ -1,3 +1,4 @@
+// src/pages/RegisterPage/RegisterPage.tsx
 import React, { useState, useEffect } from 'react';
 import Layout from '../../containers/Layout/Layout';
 import Section from '../../containers/Section/Section';
@@ -36,15 +37,7 @@ const RegisterPage: React.FC = () => {
 		<Layout>
 			<Section>
 				<Card>
-					<RegisterForm onSubmit={handleRegisterSubmit} name={''} email={''} password={''} confirmPassword={''} onNameChange={function (name: string): void {
-                        throw new Error('Function not implemented.');
-                    } } onEmailChange={function (email: string): void {
-                        throw new Error('Function not implemented.');
-                    } } onPasswordChange={function (password: string): void {
-                        throw new Error('Function not implemented.');
-                    } } onConfirmPasswordChange={function (confirmPassword: string): void {
-                        throw new Error('Function not implemented.');
-                    } } />
+					<RegisterForm onSubmit={handleRegisterSubmit} />
 				</Card>
 				{data && <div>{data.message}</div>}
 				{error && <div>Error: {error}</div>}

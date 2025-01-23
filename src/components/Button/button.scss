@@ -1,0 +1,35 @@
+@use './variables' as *;
+
+.storybook-button {
+	font-family: $font-family;
+	padding: 0.5em 1em;
+	color: white;
+	border: 2px solid transparent;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.storybook-button--primary {
+	background-color: $primary-color;
+}
+
+.storybook-button--secondary {
+	background-color: $secondary-color;
+}
+
+.storybook-button--small {
+	font-size: $font-size-small;
+}
+
+.storybook-button--medium {
+	font-size: $font-size-base;
+}
+
+.storybook-button--large {
+	font-size: $font-size-large;
+}
+
+.storybook-button:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
